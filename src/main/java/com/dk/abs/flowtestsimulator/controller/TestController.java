@@ -5,6 +5,7 @@ import com.dk.abs.flowtestsimulator.util.CustomCode;
 import com.dk.abs.flowtestsimulator.util.EventParsingUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,14 @@ public class TestController {
 
     @PostMapping
     public String receiveHookedEvent(@RequestBody String log){
-        JSONObject eventObj = new JSONObject(log);
-        boolean isEvent = EventParsingUtil.isTestEvent(eventObj.getJSONObject(CustomCode.head.name()));
 
-        if(!isEvent){
+        // [Parsing] 파싱
+        JSONObject eventObj = new JSONObject(log);
+        // [Check] 테스트 메시지 확인
+        boolean isEvent = EventParsingUtil.isTestEvent(eventObj.getJSONObject(CustomCode.head.name()));
+        boolean isTestOngoing = testManager.isTestOnGoing();
+
+        if(!isEvent || !isTestOngoing){
             System.out.println("This is not event we want to parse. " + eventObj.toString());
         }else{
             // 1. 테스트 유효 확인 (Timer Action Time Out 발생 여부).
@@ -45,6 +50,15 @@ public class TestController {
     public void stopTimer(){testManager.stopActionTimer();}
 
     @GetMapping("/timer/reset")
-    public void resetTimer(){testManager.resetActionTimer();;}
+    public void resetTimer(){testManager.resetActionTimer();}
+
+    @Value("#{custom['my.test']}")
+    private String test;
+    @GetMapping("/test/property")
+    public String getProperty(){
+        return test;
+    }
+
+
 
 }

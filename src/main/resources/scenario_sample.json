@@ -1,0 +1,30 @@
+{
+  "SelectedScenario": "BP",
+  "ActionTimeOutSec": 10,
+  "SystemJoinFlag": {
+    "BRA": true,
+    "RTA": true,
+    "EAA": true,
+    "MCA": true,
+    "RMA": true
+  },
+  "BP": [
+    {
+      "system": "EAA",
+      "event": "Event-A"
+    },
+    {
+      "system": "BRA",
+      "event": "Event-B"
+    },
+    {
+      "system": "MCA",
+      "event": "Event-C"
+    },
+    {
+      "system": "RTA",
+      "event": "Event-D"
+    }
+  ]
+
+}

@@ -14,7 +14,13 @@ public class TestManager {
     int seq = 1;
     int targetTimeSec = 10000;
     ArrayList<String> eventList = new ArrayList<>();
+    static ArrayList<String> systemList = new ArrayList<>();
 
+    static {
+        // system sample data.
+        systemList.add("BRA");
+        systemList.add("RTA");
+    }
     /**
      * Features related w/ Common
      * 1. check the test status.
