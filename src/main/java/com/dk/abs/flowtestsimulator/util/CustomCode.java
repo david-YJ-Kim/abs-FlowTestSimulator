@@ -6,6 +6,9 @@ public enum CustomCode {
     body,
     cid,
     tid,
+    src,
     osrc,
-    TST
+    TST,
+
+    INIT
 }

@@ -1,5 +1,6 @@
 package com.dk.abs.flowtestsimulator.manager;
 
+import com.dk.abs.flowtestsimulator.util.CustomCode;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,10 +14,13 @@ public class TestManager {
     Timer actionTimer;
     int seq = 1;
     int targetTimeSec = 10000;
-    ArrayList<String> eventList = new ArrayList<>();
+    static ArrayList<String> eventList = new ArrayList<>();
     static ArrayList<String> systemList = new ArrayList<>();
 
     static {
+        // event data.
+        eventList.add(CustomCode.INIT.name());
+
         // system sample data.
         systemList.add("BRA");
         systemList.add("RTA");
@@ -25,6 +29,7 @@ public class TestManager {
      * Features related w/ Common
      * 1. check the test status.
      * 2. Mocking action when Action Timer is ringing.
+     * 3. Check whether exist in data. (system list)
      */
 
     /**
@@ -40,6 +45,7 @@ public class TestManager {
      * Features related w/ Event Managing
      * 1. Memorize the event history
      * 2. Check participated system in test.
+     * 3. Provide next event inform.
      */
 
 
@@ -61,6 +67,15 @@ public class TestManager {
     public int updateLastEvent(String eventNm){
         eventList.add(eventNm);
         return eventList.size();
+    }
+
+    /**
+     * Event Managing
+     * Provide next event name in pre-defined scenario.
+     * @return
+     */
+    public String getNextEventNm(){
+        return "";
     }
 
     /***
@@ -114,5 +129,15 @@ public class TestManager {
     public void actionTimeout(){
         this.testFlag = false;
         System.out.println("Action Time Out. Test is Failed. Flag gonna be False");
+    }
+
+    /**
+     * Common
+     * Check whether is need to mocking system.
+     * @param system
+     * @return
+     */
+    public boolean isSystemExist(String system){
+        return systemList.contains(system);
     }
 }
