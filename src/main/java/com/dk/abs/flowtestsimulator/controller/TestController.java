@@ -29,11 +29,12 @@ public class TestController {
 
 
     @PostMapping("/test/start")
-    public void startTestHooking(@RequestBody String configJson){}
+    public void startTest(@RequestBody String configJson){}
 
 
     @GetMapping("/test/start/file")
-    public void startTestHooking(){
+    public void startTest(){
+
     }
 
     @PostMapping

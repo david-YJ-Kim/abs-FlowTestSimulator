@@ -7,8 +7,8 @@ public enum CustomCode {
     cid,
     tid,
     src,
-    osrc,
+    osrc, // Test Round
     TST,
+    INIT,
 
-    INIT
 }
