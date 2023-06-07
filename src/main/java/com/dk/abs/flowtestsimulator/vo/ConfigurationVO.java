@@ -1,5 +1,7 @@
 package com.dk.abs.flowtestsimulator.vo;
 
+import com.dk.abs.flowtestsimulator.manager.TestManager;
+import com.dk.abs.flowtestsimulator.vo.ivo.ManageConfIVO;
 import lombok.Getter;
 import lombok.ToString;
 import org.json.JSONArray;
@@ -28,6 +30,11 @@ enum ConfigurationCode {
  * 7. Action Timer
  */
 
+
+/**
+ *
+ */
+
 @ToString
 @Getter
 public class ConfigurationVO {
@@ -47,10 +54,8 @@ public class ConfigurationVO {
     String selectedScenario;
     JSONArray scenarioDetails;
 
-    /**
-     *
-     * @param jsonObject : Admin으로 부터 수신 받은 테스트 진행서
-     */
+    TestManager manager;
+
     public ConfigurationVO(JSONObject jsonObject){
 
         testRound = jsonObject.getString(ConfigurationCode.TestRound.name());
@@ -64,8 +69,25 @@ public class ConfigurationVO {
 
     /**
      *
-     * @param joinDetailObject
+     * @param jsonObject : Admin으로 부터 수신 받은 테스트 진행서
+     */
+    public ConfigurationVO(JSONObject jsonObject, TestManager manager){
+
+        testRound = jsonObject.getString(ConfigurationCode.TestRound.name());
+        actionTimeOutSec = jsonObject.getInt(ConfigurationCode.ActionTimeOutSec.name());
+        selectedScenario = jsonObject.getString(ConfigurationCode.SelectedScenario.name());
+        participatedSystemList = setJoinSystemList(jsonObject.getJSONObject(ConfigurationCode.SystemJoinFlag.name()));
+        scenarioDetails = jsonObject.getJSONArray(selectedScenario);
+        eventHistoryList = new ArrayList<>();
+        manager = manager;
+
+    }
+
+
+    /**
+     *
      * @return
+     * @param joinDetailObject
      */
     private ArrayList setJoinSystemList(JSONObject joinDetailObject){
 
@@ -118,5 +140,6 @@ public class ConfigurationVO {
     private void actionTimeout(){
         this.actionTimeOutFlag = false;
         System.out.println("Action Time Out. Test is Failed. Flag gonna be False");
+//        manager.
     }
 }

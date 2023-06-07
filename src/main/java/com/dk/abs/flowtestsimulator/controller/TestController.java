@@ -61,7 +61,7 @@ public class TestController {
                 System.out.println("Test has been over. It's fail.");
             } else {
                 // 2. Simulator System 여부 확인.
-                if(!verificationService.isMockingSystem(requestSystem)){
+                if(!verificationService.isMockingSystem("testRound",requestSystem)){
                     return null;
                 }
 

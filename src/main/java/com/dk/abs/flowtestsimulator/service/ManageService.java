@@ -1,5 +1,6 @@
 package com.dk.abs.flowtestsimulator.service;
 
+import com.dk.abs.flowtestsimulator.manager.TestManager;
 import com.dk.abs.flowtestsimulator.util.MemoryStorage;
 import com.dk.abs.flowtestsimulator.vo.ConfigurationVO;
 import org.json.JSONObject;
@@ -16,17 +17,14 @@ public class ManageService {
         this.storage = storage;
     }
 
-    public String prepareTest(JSONObject jsonObject){
+    public ConfigurationVO generateConfigurationVO (JSONObject jsonObject, TestManager manager){
 
         // 1. generate Configuration VO.
-        ConfigurationVO vo = new ConfigurationVO(jsonObject);
-        String testRound = vo.getTestRound();
+        return new ConfigurationVO(jsonObject, manager);
 
-        // 2. save vo in memory storage.
-
-        // 3. get initialize message
-        return "Message to init WFS";
     }
+
+
 
 
 }

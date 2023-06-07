@@ -11,21 +11,10 @@ import java.nio.charset.StandardCharsets;
 
 public class EventParsingUtil {
 
-    public static boolean isTestEvent(JSONObject headObj){
-        if(headObj.getString(CustomCode.osrc.name()).startsWith(CustomCode.TST.name())){
-            return true;
-        }else{
-            return false;
-        }
+    public static String getMessageId(JSONObject jsonObject){
+        return "";
     }
 
-    public static boolean isTestEvent(String eventId){
-        if(eventId.startsWith(CustomCode.TST.name())){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * Read Configuration File and make VO.
