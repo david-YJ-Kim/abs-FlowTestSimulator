@@ -12,4 +12,8 @@ public class MockingService {
     public void sendMockingMessage(JSONObject object){
 
     }
+
+    public void bypassRequestMessage(){
+
+    }
 }

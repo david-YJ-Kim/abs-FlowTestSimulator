@@ -38,6 +38,15 @@ public class MemoryStorage {
 
     // Method to search data
     public ConfigurationVO search(String key) {
-        return memoryMap.get(key);
+        ConfigurationVO configurationVO = memoryMap.get(key);
+        if (configurationVO == null) {
+            throw new IllegalArgumentException("Key does not exist");
+        }
+        return configurationVO;
+    }
+
+
+    public int getSize(){
+        return memoryMap.size();
     }
 }
